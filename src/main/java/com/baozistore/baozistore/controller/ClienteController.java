@@ -22,8 +22,15 @@ public class ClienteController {
         return repository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Cliente buscarPorId(@PathVariable Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     @PostMapping
     public Cliente salvarCliente(@RequestBody Cliente cliente) {
         return repository.save(cliente);
+
+
     }
 }
