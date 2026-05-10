@@ -30,7 +30,11 @@ public class ClienteController {
     @PostMapping
     public Cliente salvarCliente(@RequestBody Cliente cliente) {
         return repository.save(cliente);
+    }
 
+    @DeleteMapping("/{id}")
+    public void deletarCliente(@PathVariable Long id) {
+        repository.deleteById(id);
 
     }
 }
