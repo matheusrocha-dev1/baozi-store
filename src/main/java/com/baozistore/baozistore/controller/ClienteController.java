@@ -1,40 +1,39 @@
 package com.baozistore.baozistore.controller;
 
-import com.baozistore.baozistore.model.Cliente;
-import com.baozistore.baozistore.repository.ClienteRepository;
+import com.baozistore.baozistore.entity.Cliente;
+import com.baozistore.baozistore.service.ClienteService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
-
 public class ClienteController {
 
-    private final ClienteRepository repository;
+    private final ClienteService clienteService;
 
-    public ClienteController(ClienteRepository repository) {
-        this.repository = repository;
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
     }
 
     @GetMapping
     public List<Cliente> listarClientes() {
-        return repository.findAll();
+        return clienteService.listarClientes();
     }
 
     @GetMapping("/{id}")
-    public Cliente buscarPorId(@PathVariable Long id) {
-        return repository.findById(id).orElse(null);
+    public Optional<Cliente> buscarPorId(@PathVariable Long id) {
+        return clienteService.buscarPorId(id);
     }
 
     @PostMapping
     public Cliente salvarCliente(@RequestBody Cliente cliente) {
-        return repository.save(cliente);
+        return clienteService.salvarCliente(cliente);
     }
 
     @DeleteMapping("/{id}")
     public void deletarCliente(@PathVariable Long id) {
-        repository.deleteById(id);
-
+        clienteService.deletarCliente(id);
     }
 }

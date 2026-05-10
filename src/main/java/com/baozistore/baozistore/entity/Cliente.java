@@ -1,4 +1,4 @@
-package com.baozistore.baozistore.model;
+package com.baozistore.baozistore.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
