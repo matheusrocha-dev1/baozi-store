@@ -27,6 +27,13 @@ public class ProdutoController {
         return produtoService.listarProdutos();
     }
 
+    @GetMapping("/{id}")
+    public Produto buscarPorId(@PathVariable Long id) {
+
+        return produtoService.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    }
+
     @PutMapping("/{id}")
     public Produto atualizarProduto(@PathVariable Long id,
                                     @RequestBody Produto produto) {
